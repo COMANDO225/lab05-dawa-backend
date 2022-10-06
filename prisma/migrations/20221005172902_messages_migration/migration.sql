@@ -1,0 +1,14 @@
+/*
+  Warnings:
+
+  - Added the required column `sender_id` to the `messages` table without a default value. This is not possible if the table is not empty.
+
+*/
+-- DropForeignKey
+ALTER TABLE "messages" DROP CONSTRAINT "messages_user_id_fkey";
+
+-- AlterTable
+ALTER TABLE "messages" ADD COLUMN     "sender_id" INTEGER NOT NULL;
+
+-- AddForeignKey
+ALTER TABLE "messages" ADD CONSTRAINT "messages_sender_id_fkey" FOREIGN KEY ("sender_id") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
